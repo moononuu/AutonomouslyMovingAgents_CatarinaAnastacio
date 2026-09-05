@@ -24,10 +24,16 @@ public class Bot : MonoBehaviour
         agent.SetDestination(this.transform.position - fleeVector);  
     }
 
+    void Persue()
+    {
+        Vector3 targetDir = target.transform.position - this.transform.position;
+        float lookAhead = targetDir.magnitude / (agent.speed + target.GetComponent<Drive>().currentSpeed);
+        Seek(target.transform.position + target.transform.forward * lookAhead);
+    }
 
 // Update is called once per frame
 void Update()
     {
-        Flee(target.transform.position);
-}
+        Persue();
+    }
 }
